@@ -202,7 +202,8 @@ class CustomListView extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.7),
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.7),
                     child: Padding(
                       child: Image.network(photo.url),
                       padding: EdgeInsets.only(bottom: 8.0),
@@ -210,15 +211,17 @@ class CustomListView extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.7),
-                    child: Padding(
-                        child: Text(
-                          "Photo title: " + photo.title,
-                          style: new TextStyle(fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.right,
-                        ),
-                        padding: EdgeInsets.all(1.0)),
-                    )],
+                      constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width * 0.7),
+                      child: Padding(
+                          child: Text(
+                            "Photo title: " + photo.title,
+                            style: new TextStyle(fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.right,
+                          ),
+                          padding: EdgeInsets.all(1.0)),
+                    )
+                  ],
                 )
               ],
             ),
@@ -569,7 +572,15 @@ class _gPhotoPageState extends State<gPhotoPage> {
         primarySwatch: Colors.teal,
       ),
       home: new Scaffold(
-        appBar: new AppBar(title: const Text('Group Photos')),
+        appBar: new AppBar(title: const Text('Group Photos'), actions: <Widget>[
+          // action button
+          IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ]),
         body: new Center(
           child: new FutureBuilder<gPhotos>(
             future: fetchGroupPhotos(widget.gId.toString()),
